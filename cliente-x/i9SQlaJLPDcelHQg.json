@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-07-30T00:46:20.391Z",
-  "updatedAt": "2025-07-31T16:32:18.000Z",
+  "updatedAt": "2025-07-31T18:21:48.000Z",
   "id": "i9SQlaJLPDcelHQg",
   "name": "My workflow",
   "active": false,
@@ -354,6 +354,37 @@
       "name": "setInitialPage",
       "alwaysOutputData": false,
       "executeOnce": false
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-wts.wtsChat",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "346dc5aa-530e-4857-a7ea-2c307f3ebae9",
+      "name": "Send chatbot"
+    },
+    {
+      "parameters": {
+        "resource": "assistant",
+        "operation": "create",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1340,
+        -120
+      ],
+      "id": "c7aedbbe-5022-42e8-8bbf-f779d9a0677a",
+      "name": "Create an assistant"
     }
   ],
   "connections": {
@@ -563,7 +594,7 @@
       }
     ]
   },
-  "versionId": "aaf4b9d2-e27b-41f9-b6b5-d6f9a028578e",
+  "versionId": "7755026d-c6cd-47e6-abb4-fefb17deef96",
   "triggerCount": 0,
   "tags": []
 }
