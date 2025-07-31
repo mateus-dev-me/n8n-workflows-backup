@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-07-31T18:20:52.358Z",
-  "updatedAt": "2025-07-31T19:38:46.000Z",
+  "updatedAt": "2025-07-31T20:39:51.000Z",
   "id": "i28yy5jZmzqqQ52P",
   "name": "IntegracaoTeste",
   "active": false,
@@ -796,6 +796,17 @@
           "name": "WTS account"
         }
       }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f609013c-3cf6-45d4-bcd7-134f05eeec11",
+      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "connections": {
@@ -951,7 +962,7 @@
       }
     ]
   },
-  "versionId": "c61b8a2f-9159-4484-8215-d2b8bb5ea997",
+  "versionId": "2f8b0191-785f-41ce-849f-7952c993fef1",
   "triggerCount": 0,
   "tags": []
 }
