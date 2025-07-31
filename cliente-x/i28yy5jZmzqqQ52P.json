@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-07-31T18:20:52.358Z",
-  "updatedAt": "2025-07-31T18:22:50.000Z",
+  "updatedAt": "2025-07-31T19:09:50.000Z",
   "id": "i28yy5jZmzqqQ52P",
   "name": "IntegracaoTeste",
   "active": false,
@@ -729,7 +729,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        200,
+        520,
         -280
       ],
       "id": "bd8e0119-14b8-4f1f-b8e2-e488fac90653",
@@ -738,34 +738,16 @@
     {
       "parameters": {
         "resource": "chatbot",
-        "chatbotKey": "63dfebd0-1f5f-4172-877d-2f2d03c22d62",
+        "chatbotKey": "bd463cc8-6659-4742-8fd6-65cc040e214b",
         "channelId": "55d43640-0a72-4a05-91a5-1393d966136c",
-        "numberToSend": "={{ $('Webhook').item.json.body.number }}",
+        "numberToSend": "=5588988145433",
+        "skipIfBotInExecution": "={{ false }}",
+        "skipIfInProgress": "={{ false }}",
         "sessionMetadatas": {
           "sessionMetadata": [
             {
-              "key": "VR_DATAAGENDADA",
-              "value": "={{ $('Webhook').item.json.body.data }}"
-            },
-            {
-              "key": "VR_DIASEMANADATAAGENDADA",
-              "value": "={{ $('Webhook').item.json.body.diadasemana }}"
-            },
-            {
-              "key": "VR_HORAAGENDADA",
-              "value": "={{ $json.body.hora }}"
-            },
-            {
-              "key": "VR_LISTAPROCEDIMENTOSDIA",
-              "value": "={{ $json.listaProcedimentoMedico[0] }}"
-            },
-            {
-              "key": "VR_NOMEPACIENTE",
-              "value": "={{ $('Webhook').item.json.body.paciente }}"
-            },
-            {
-              "key": "VR_AGENDAMENTOID",
-              "value": "={{ $('Webhook').item.json.body.agendamentoId }}"
+              "key": "=metaTeste",
+              "value": "Teste"
             }
           ]
         }
@@ -773,11 +755,41 @@
       "type": "n8n-nodes-wts.wtsChat",
       "typeVersion": 1,
       "position": [
-        -20,
-        -280
+        300,
+        20
       ],
       "id": "8133fc38-ab80-4ebd-8497-ba20b43de217",
       "name": "Send chatbot",
+      "credentials": {
+        "wtsApi": {
+          "id": "mQhZgFusVT81AlQc",
+          "name": "WTS account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chatbot",
+        "chatbotKey": "bd463cc8-6659-4742-8fd6-65cc040e214b",
+        "channelId": "55d43640-0a72-4a05-91a5-1393d966136c",
+        "numberToSend": "5588988145433",
+        "sessionMetadatas": {
+          "sessionMetadata": [
+            {
+              "key": "metaTeste",
+              "value": "Teste2222"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-wts.wtsChat",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -280
+      ],
+      "id": "ae1e2d29-6e37-472f-98ab-2b06f826d14e",
+      "name": "Send chatbot1",
       "credentials": {
         "wtsApi": {
           "id": "mQhZgFusVT81AlQc",
@@ -835,7 +847,7 @@
       "main": [
         [
           {
-            "node": "Send chatbot",
+            "node": "Send chatbot1",
             "type": "main",
             "index": 0
           }
@@ -877,13 +889,17 @@
     },
     "Send chatbot": {
       "main": [
-        [
-          {
-            "node": "Respond to Webhook",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        []
+      ]
+    },
+    "Send chatbot1": {
+      "main": [
+        []
       ]
     }
   },
@@ -935,7 +951,7 @@
       }
     ]
   },
-  "versionId": "d78107fc-2b1c-4f3f-9ecd-8f3e8adae487",
+  "versionId": "cc58532d-8f5a-4f56-a757-986104054f9e",
   "triggerCount": 0,
   "tags": []
 }
