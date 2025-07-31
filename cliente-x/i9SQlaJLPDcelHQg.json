@@ -1,0 +1,569 @@
+{
+  "createdAt": "2025-07-30T00:46:20.391Z",
+  "updatedAt": "2025-07-31T16:32:18.000Z",
+  "id": "i9SQlaJLPDcelHQg",
+  "name": "My workflow",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        480
+      ],
+      "id": "217638d5-f59f-4cba-b73f-e02c961c556f",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"page\": 1\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        280,
+        -60
+      ],
+      "id": "c77aec46-bc45-4cd1-a6dd-fd61c9ba5350",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n page: {{ $json.page+1 }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        540,
+        -60
+      ],
+      "id": "5cd42464-a258-4c20-82d0-562f371d9026",
+      "name": "Edit Fields2",
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "519a1e97-f096-4b50-8a54-b3ced802bb19",
+              "leftValue": "={{ $json.page }}",
+              "rightValue": 4,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        840,
+        -40
+      ],
+      "id": "3efad987-9191-47d1-af7a-09137cb5f8fa",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "url": "https://api.wts.chat/chat/v1/session?Status=COMPLETED&PageSize=100&PageNumber=1",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer pn_Toqps8ScZo7NaalGSgiLuJVZoTVcU21OBrNyUFxloQ"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        420,
+        480
+      ],
+      "id": "4aa8ef62-8a42-450d-bf05-261c2e0bcb9f",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $now }}",
+        "format": "x",
+        "options": {
+          "includeInputFields": false
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        100,
+        480
+      ],
+      "id": "6b85f7f0-731d-4250-96fd-e0edb3e02009",
+      "name": "dataAtualN8n"
+    },
+    {
+      "parameters": {
+        "jsCode": "  var array = $('HTTP Request').first().json.items\n\nreturn array.map(array => {\n\treturn {\n\t\tjson: {\n\t\t\tobj: array\n\t\t}\n\t};\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1300,
+        480
+      ],
+      "id": "0142a129-f5ca-40c4-9993-34b7aaffcba1",
+      "name": "Code1",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4df00509-a619-4574-9023-ddff2d55cfcb",
+              "leftValue": "={{ $json.obj.number }}",
+              "rightValue": 5,
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2340,
+        520
+      ],
+      "id": "65abec31-987b-4416-a3e6-8991a52fca35",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "jsCode": "  var array = $('HTTP Request2').first().json.items\n\n\n\nreturn array.map(array => {\n\treturn {\n\t\tjson: {\n\t\t\tobj: array\n\t\t}\n\t};\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2940,
+        560
+      ],
+      "id": "ec315dfa-d27d-4df4-b94d-5dccf365153f",
+      "name": "Code3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4df00509-a619-4574-9023-ddff2d55cfcb",
+              "leftValue": "={{ $('Edit Fields1').item.json.hasMorePage }}",
+              "rightValue": 5,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1840,
+        240
+      ],
+      "id": "50bf6976-1d82-4fbe-9d7c-9f0bf0f47f06",
+      "name": "If2",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"hasMorePage\": {{ $json.hasMorePages }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        680,
+        480
+      ],
+      "id": "7bce6da7-dabe-4b38-b415-b1441c57c2a3",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.wts.chat/chat/v1/session?Status=COMPLETED&PageSize=100&PageNumber={{ $json.page++ }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "=Authorization",
+              "value": "Bearer pn_Toqps8ScZo7NaalGSgiLuJVZoTVcU21OBrNyUFxloQ"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2400,
+        140
+      ],
+      "id": "c6f5a127-1927-4237-a5be-3f9f45933596",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n   page: 2\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2140,
+        140
+      ],
+      "id": "1913a51e-ef1c-45e6-8ed1-2728de95ea3f",
+      "name": "Edit Fields3",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"hasMorePage\": {{ $json.hasMorePages }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2680,
+        360
+      ],
+      "id": "9f172860-7b7d-498c-85d3-f1b4cc84f2b0",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "buscaRegistros",
+          "mode": "list",
+          "cachedResultName": "buscaRegistros"
+        },
+        "dataMode": "defineBelow",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        2120,
+        420
+      ],
+      "id": "24dc2dde-2530-4061-8945-fe692e95a0b3",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "mySql": {
+          "id": "VHnpc0uQBIlaebhY",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1620,
+        480
+      ],
+      "id": "7517d6b5-1f56-41f0-abba-ed6ffc6acb58",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        480
+      ],
+      "id": "221a26ca-37d0-4b4d-aad6-81ed7b16d45b"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"page\": 50\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1020,
+        580
+      ],
+      "id": "60852219-2fc8-4f33-8349-ddb44a79652e",
+      "name": "setInitialPage",
+      "alwaysOutputData": false,
+      "executeOnce": false
+    }
+  ],
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "dataAtualN8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "dataAtualN8n": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "Code3": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "setInitialPage": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "When clicking ‘Test workflow’": [
+      {
+        "json": {
+          "isArtificialRecoveredEventItem": true
+        }
+      }
+    ]
+  },
+  "versionId": "aaf4b9d2-e27b-41f9-b6b5-d6f9a028578e",
+  "triggerCount": 0,
+  "tags": []
+}
