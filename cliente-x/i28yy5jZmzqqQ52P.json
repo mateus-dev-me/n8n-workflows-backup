@@ -1,0 +1,19 @@
+{
+  "createdAt": "2025-07-31T18:20:52.358Z",
+  "updatedAt": "2025-07-31T18:20:52.358Z",
+  "id": "i28yy5jZmzqqQ52P",
+  "name": "IntegracaoTeste",
+  "active": false,
+  "isArchived": false,
+  "nodes": [],
+  "connections": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "527e6605-1adf-4610-a249-1047c609a391",
+  "triggerCount": 0,
+  "tags": []
+}
